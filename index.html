@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport"; content="width=device-width, initial-scale=1";>
+ <title>Analisi grammaticale</title>
+ <link rel="stylesheet"; href="";>
+ 
+ <script src="";></script>
+ 
+ <style>
+  body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 100vh;
+    background-image: url('bckg.jpg');
+    background-attachment: fixed;
+    background-position: center0;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  main {
+    margin-top: 40px;
+  }
+  main, .output-container {
+    width: 80%;
+    max-width: 1000px;
+    background-color: rgba(0, 255, 255, 0.5);
+    padding: 10px;
+  }
+  form {
+    padding: 10px;
+  }
+  form * {
+    display: block;
+    margin-bottom: 5px;
+  }
+  label {
+    font-weight: bold;
+  }
+  #inputField {
+    width: 100%;
+  }
+  .output-container {
+    display: none;
+    border: 1px solid black;
+    margin-top: 10px;
+  }
+  p {
+    width: fit-content;
+  }
+  #outputFieldGrammatica {
+    text-align: right;
+    line-height: 1.7rem;
+  }
+  #outputFieldLogica {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  @media print {
+    main {
+      display: none;
+    }
+    .output-container {
+      position: absolute;
+      border: none;
+      top: 0;
+      left: 0;
+    }
+  }
+ </style>
+ 
+</head>
+
+<body>
+  <main>
+    <h1>Analisi grammaticale</h1>
+    <h2>Separa le parole delle frasi e le incolonna</h2>
+
+    <fieldset>
+      <form>
+        <label>
+            Inserisci qui di seguito la frase o le frasi <br>
+            Normalizza gli articoli con apostrofo: ad es. l' => la/lo, un' => una/uno. <br>
+            Fai lo stesso con le preposizioni articolate: ad es. dell' => della/dello
+        </label>
+        <textarea rows="5" placeholder="Testo" id="inputField"></textarea>
+        <button type="button" onclick="analize()">Formatta</button>
+      </form>
+    </fieldset>
+  </main>
+
+
+<section class="output-container">
+  <p id="outputFieldLogica"></p>
+  <p id="outputFieldGrammatica"></p>
+</section>
+
+</body>
+
+<script>
+
+  const inputField = document.querySelector('#inputField');
+  const outputContainer = document.querySelector('.output-container')
+  const outputFieldLogica = document.querySelector('#outputFieldLogica');
+  const outputFieldGrammatica = document.querySelector('#outputFieldGrammatica');
+
+  function analize() {
+    const text = inputField.value;
+    const splitText = text.split(" ");
+    const formattedText = splitText.map(word => `${word} = ___________________________________________`);
+    let outputText = '';
+    for (let i = 0; i < formattedText.length; i++) {
+      outputText += `${formattedText[i]} <br>`;
+    }
+    outputContainer.style.display = 'block'
+    outputFieldLogica.innerHTML = text;
+    outputFieldGrammatica.innerHTML = outputText;
+  }
+
+</script>
+
+</html>
